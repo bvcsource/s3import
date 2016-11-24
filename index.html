@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
+    <title>S3import - S3 data import utility</title>
+    <!-- Bootstrap-->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery-form.js"></script>
+    <script src="assets/js/contact-us.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/spin.js"></script>
+    <script src="assets/js/ladda.js"></script>
+    <script src="assets/js/highlight.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/css/animate.css" rel="stylesheet">
+    <link href="assets/css/tomorrow.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries-->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://-->
+    <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+    script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+    -->
+  </head>
+  <body>
+    <div class="header">
+      <section class="home-main-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 page-header">
+              <h1>S3import - S3 data import utility</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <section class="section-cloud section-white">
+      <div class="container">
+        <div class="row">
+          <div class="flex-box flex-box--header">
+            <div class="col-md-12">
+              <h3>Introduction</h3>
+              <p>s3import is a tool for importing data from S3 to an SX Cluster. For each source S3 bucket s3import creates a volume on the cluster and copies the keys from the bucket to the new volume.</p>
+              <p>s3import uses boto (<a href="https://pypi.python.org/pypi/boto">https://pypi.python.org/pypi/boto</a>) and python-sxclient (<a href="https://pypi.python.org/pypi/sxclient">https://pypi.python.org/pypi/sxclient</a>) and works in Python 2.7.</p>
+              <h3>Installation</h3>
+              <p>To install s3import, run:</p>
+              <pre><code>$ pip install s3import</code></pre>
+              <p>Alternatively, to install s3import from source, run:</p>
+              <pre><code>$ pip install <path></code></pre>
+              <p>or</p>
+              <pre><code>$ pip install -e <path></code></pre>
+              <p>replacing <path> with path to the source.</p>
+              <h3>Configuration</h3>
+              <p>Configuration for connecting with an S3 service is obtained from boto config file. Your file should contain at least:</p>
+              <ul>
+                <li>aws_access_key_id in [Credentials] - section, with your S3 access key ID as a value;</li>
+                <li>aws_secret_access_key in [Credentials] - section, with your S3 secret access key as a value.</li>
+              </ul>
+              <p>Additionally, if you want to connect to an S3 service other than Amazon S3, your file should contain:</p>
+              <ul>
+                <li>s3_host in [Credentials] section, with hostname of the S3 service you want to access;</li>
+                <li>s3_port in [Credentials] section, with port which the S3 service uses.</li>
+              </ul>
+              <p>By default, connection with S3 is secured by SSL and the SSL certificates are verified. If you wish to change any of these behaviours, add is_secure = False and https_validate_certificates = False respectively to the [Boto] section of your config file.</p>
+              <p>In order for boto to read the config file automatically, you should name it .boto and place it in your home directory. You can also set the environment variable BOTO_CONFIG with the path to the configuration file you want to use prior to running s3import.</p>
+              <p>Be wary that boto tries to read configuration options from other locations than boto config file. For example, if a file ~/.aws/credentials exists, boto will read credential settings from there. For more information see <a href="http://docs.pythonboto.org/en/latest/boto_config_tut.html">http://docs.pythonboto.org/en/latest/boto_config_tut.html.</a></p>
+              <p>Below is an example content of a configuration file:</p>
+              <pre><code>[Credentials]
+s3_host = s3.example.com
+s3_port = 8443
+aws_access_key_id = s3_user
+aws_secret_access_key = secret_key
+
+[Boto]
+is_secure = True
+https_validate_certificates = True</code></pre>
+              <h3>SX and import configuration</h3>
+              <p>Configuration for connecting with an SX Cluster and importing the buckets is obtained from s3import command-line arguments. You can display their descriptions by running s3import --help.</p>
+              <h3>Usage</h3>
+              <p>After installation, a command-line tool named s3import will become available. Run:</p>
+              <pre><code>$ s3import --help</code></pre>
+              <p>for a list of available options.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
